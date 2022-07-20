@@ -1,0 +1,36 @@
+:root {
+    --text-white: white;
+    --text-black: black;
+    --light-green: #7c917f;
+    --dark-green: #323a33;
+    --light-brown: #917c81;
+    --light-gray: #3d3c38;
+    --input-green: #899c8c;
+}
+.text-white {
+    color: var(--text-white);
+}
+.text-black {
+    color: var(--text-black);
+}
+.bg-green {
+    background-color: var(--light-green);
+}
+.bg-green-dark {
+    background-color: var(--dark-green);
+}
+.bg-brown {
+    background-color: var(--light-brown);
+}
+.text-brown {
+    color: var(--light-brown);
+}
+.text-gray {
+    color: var(--light-gray);
+}
+.bg-input-green {
+    background-color: var(--input-green);
+}
+h1,h2,h3 {
+    font-family: 'Montserrat-Bold';
+}

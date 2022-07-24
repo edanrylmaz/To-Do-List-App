@@ -1,9 +1,13 @@
 //#region variables
+
 var parentList = document.getElementById('list-items');
 const taskInput = document.querySelector('.task-input input');
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 var checkBtn = document.querySelector('input[type="checkbox"]');
 var delBtn = document.querySelector('#list-items>li>*:nth-child(3)');
+var total = document.querySelector('.total > li');
+var remaining = document.querySelector('.remaining > li');
+var done = document.querySelector('.done > li');
 //#endregion variables end
 //#region time settings
 // get date 
@@ -30,6 +34,7 @@ taskInput.addEventListener('keyup',e => {
         if(!todos){
             todos = [];
         }
+        taskInput.value ="";
         let taskInfo = {name: userTask, status:"remainig"};
         todos.push(taskInfo);
         localStorage.setItem("todo-list",JSON.stringify(todos));
@@ -44,21 +49,24 @@ function ShowTodo(){
     if(todos){
         todos.forEach((todo,id) => {
             let isComplated = todo.status =="complated" ? "checked" : "";
-        li += `<li class="d-flex gap-1 bg-green p-1 align-items-center">
+        li += `<li class="d-flex gap-1 bg-input-light p-0-75 align-items-center">
                     <input type="checkbox" onclick ="updateStatus(this)" name="" id="${id}" ${isComplated}>
                     <label for="${id}"></label>
                      <!-- <a href="" class="d-flex align-items-center">
                         <img src="assets/icons/radio-button-off-svgrepo-com.svg" alt="">
                     </a> -->
                     <p contenteditable="true" class="${isComplated}" onclick ="editContent(${id}, '${todo.name}')">${todo.name}</p>
-                    <a class="delete-btn ml-auto d-flex align-items-center" onclick="deleteItem(${id})" href="">
-                        <img src="assets/icons/delete.jpeg" alt="">
+                    <a class="delete-btn ml-auto d-flex align-items-center" onclick="deleteItem(${id})" href="#">
+                        <img src="assets/icons/delete.svg" alt="">
                     </a>
                 </li>` ;
     });
     parentList.innerHTML = li;
+    ItemCount();
+    CheckedItemCount();
 }
 }
+ShowTodo();
 function updateStatus(selectedTask){
     let taskContent = selectedTask.parentElement.children.item(2);
     if(selectedTask.checked){
@@ -70,47 +78,28 @@ function updateStatus(selectedTask){
         todos[selectedTask.id].status ="remaining";
     }
     localStorage.setItem("todo-list",JSON.stringify(todos));
+    CheckedItemCount();
 }
 function deleteItem(deleteId){
     todos.splice(deleteId,1);
     localStorage.setItem("todo-list",JSON.stringify(todos));
     ShowTodo();
 }
-function Filter(){
-    var all = Object.keys(localStorage);
-    console.log(all);
+function ItemCount(){
+    var totalItem = parentList.getElementsByTagName('li').length;
+    total.innerHTML = totalItem;
 }
-Filter();
-// function editContent(id,text){
-    
-// }
-    ShowTodo();
-// function AddItem(e){
-//     e.preventDefault();
-//     var getInput = document.getElementById('item').value;
-//     // create element add class
-//     var newListItem = document.createElement('li');
-//     var newCheckBtn = document.createElement('input');
-//     newCheckBtn.type = "checkbox";
-//     var newP = document.createElement('p');
-//     var newDelBtn = document.createElement('a');
-//     var newDelBtnImg = document.createElement('img');
-//     newListItem.className = 'd-flex gap-1 bg-green p-1 align-items-center';
-//     newDelBtn.className = 'delete-btn ml-auto d-flex align-items-center';
-//     newDelBtnImg.src = "assets/icons/delete.jpeg";
-//     newP.setAttribute("contentEditable","true");
-//     newDelBtn.addEventListener('click',DeleteItem);
-//     newP.appendChild(document.createTextNode(getInput));
-//     newListItem.appendChild(newCheckBtn);
-//     newListItem.appendChild(newP);
-//     newDelBtn.appendChild(newDelBtnImg);
-//     newListItem.appendChild(newDelBtn);
-//     parentList.appendChild(newListItem);
-// }
-// function DeleteItem(e){
-//     e.preventDefault();
-//     if (confirm('Are You Sure?')) {
-//         parentList.removeChild(e.target.parentElement.parentElement);
-//     }
-// }
+function CheckedItemCount(){
+    var uncheckedCount = 0;
+    var checkedCount = 0;
+    var checkedItem = parentList.getElementsByTagName('li');
+    for (let i = 0; i < checkedItem.length; i++) {
+        if(checkedItem.item(i).querySelector('input[type="checkbox"]').checked)
+            checkedCount++;
+        else
+            uncheckedCount++;
+    }
+    remaining.innerHTML = uncheckedCount;
+    done.innerHTML = checkedCount;
+}
 //#endregion function end

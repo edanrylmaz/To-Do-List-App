@@ -1,11 +1,12 @@
 :root {
     --text-white: white;
     --text-black: black;
-    --light-green: #7c917f;
-    --dark-green: #323a33;
+    --light-blue: #005792;
+    --dark-blue: #00204a;
     --light-brown: #917c81;
     --light-gray: #3d3c38;
     --input-green: #899c8c;
+    --input-light: #5585b5;
 }
 .text-white {
     color: var(--text-white);
@@ -13,11 +14,11 @@
 .text-black {
     color: var(--text-black);
 }
-.bg-green {
-    background-color: var(--light-green);
+.bg-blue {
+    background-color: var(--light-blue);
 }
-.bg-green-dark {
-    background-color: var(--dark-green);
+.bg-blue-dark {
+    background-color: var(--dark-blue);
 }
 .bg-brown {
     background-color: var(--light-brown);
@@ -30,6 +31,9 @@
 }
 .bg-input-green {
     background-color: var(--input-green);
+}
+.bg-input-light {
+    background-color: var(--input-light);
 }
 h1,h2,h3 {
     font-family: 'Montserrat-Bold';

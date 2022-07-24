@@ -8,8 +8,20 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <style>
         /* mobile view start */
-        section>*:nth-child(2) {
+        body {
             height: 100vh;
+            background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114));
+            overflow: hidden;
+            padding: 16px;
+        }
+        section {
+            border-radius: 10px;
+            max-width: 480px;
+            max-height: 100%;
+            overflow: auto;
+            box-shadow: 1px 2px 14px 1px rgba(7,26,84,1);
+            -webkit-box-shadow: 1px 2px 14px 1px rgba(7,26,84,1);
+            -moz-box-shadow: 1px 2px 14px 1px rgba(7,26,84,1);   
         }
         section > div > h1>:nth-child(3){
             font-style: italic;
@@ -17,12 +29,9 @@
         section > div > div ul {
             font-size: 20px;
         }
-         #list-items {
-            overflow: scroll;
-        }
         #list-items >li {
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 16px;
         }
         #list-items > li > a > img {
             width: 24px;
@@ -34,80 +43,51 @@
             border-radius: 10px;
         }
         #item {
+            background: transparent;
+            border: 2px solid var(--dark-blue);
             border-radius: 10px;
+            font-size: 16px;
+        }
+        #item::placeholder {
+            color: #ffffff80;
+            font-size: 16px;
+            font-style: italic;
         }
         p.checked {
             text-decoration: line-through;
         }
         /* mobile view end */
-
-        /* desktop view start */
-        @media (min-width:992px){
-            section div{
-            flex: 1 1 40%;
-            }
-        section>*:nth-child(2) {
-            flex: 0 0 60%;
-            }
-        }
-        /* desktop view end */
-        
     </style>
 </head>
-<body>
-    <section class="d-flex flex-column flex-lg-row">
-        <div class="bg-green-dark d-lg-flex flex-lg-column">
-            <h1 class="d-flex justify-content-center gap-0-75 p-2 text-white mt-lg-4">
+<body class="d-flex flex-column justify-content-center align-items-center m-0 ">
+    <section class="d-flex flex-column w-100">
+        <div class="bg-blue-dark flex-column align-items-center">
+            <h1 class="d-flex justify-content-center gap-0-75 p-2 text-white">
                 <span class="monthday"></span>
                 <span class="month"></span>
                 <span class="weekday regular"></span>
             </h1>
-            <div class="d-flex justify-content-between justify-content-lg-center flex-lg-column gap-lg-1 p-2 text-white">
-                <ul class="text-center">
+            <div class="d-flex justify-content-center gap-3 text-white p-1">
+                <ul class="text-center total">
                     <li>1</li>
                     <li>Total</li>
                 </ul>
-                <ul class="text-center">
+                <ul class="text-center remaining">
                     <li>2</li>
                     <li>Remaining</li>
                 </ul>
-                <ul class="text-center">
+                <ul class="text-center done">
                     <li>3</li>
                     <li>Done</li>
                 </ul>
             </div>
         </div>
-        <div class="bg-white d-flex flex-column">
-            <div class="p-1 d-flex task-input text-white">
-                <input class="bg-green-dark p-1 w-100 text-white" type="text" id="item" placeholder="Add task">
-                <!-- <a href="" id="add-btn" class="d-flex align-items-center">
-                    <img src="assets/icons/plus.jpeg" alt=""> 
-                </a> -->
+        <div class="d-flex flex-column bg-blue">
+            <h2 class="text-white text-center bold py-2">Tasks For Today</h2>
+            <div class="px-1 task-input text-white">
+                <input autocomplete="off" class="p-0-5 w-100 text-white" type="text" id="item" placeholder="Add a new task">
             </div>
-            <!-- <h2 class="text-gray text-center bold py-2">Tasks For Today</h2> -->
-            <ul class="d-flex flex-column p-1 gap-1" id="list-items">
-                <!-- <li class="d-flex gap-1 bg-green p-1 align-items-center">
-                    <input type="checkbox" name="" id="check">
-                    <label for="check"></label>
-                     <a href="" class="d-flex align-items-center">
-                        <img src="assets/icons/radio-button-off-svgrepo-com.svg" alt="">
-                    </a> 
-                    <p contenteditable="true">Item 1</p>
-                    <a class="delete-btn ml-auto d-flex align-items-center" href="">
-                        <img src="assets/icons/delete.jpeg" alt="">
-                    </a>
-                </li>
-                <li class="d-flex gap-1 bg-green p-1 align-items-center">
-                    <input type="checkbox" name="" id="check">
-                    <label for="check"></label>
-                     <a href="" class="d-flex align-items-center">
-                        <img src="assets/icons/radio-button-off-svgrepo-com.svg" alt="">
-                    </a>
-                    <p contenteditable="true">Item 2</p>
-                    <a class="delete-btn ml-auto d-flex align-items-center" href="">
-                        <img src="assets/icons/delete.jpeg" alt="">
-                    </a>
-                </li> -->
+            <ul class=" p-1 d-flex flex-column gap-1 justify-content-center text-white" id="list-items">
             </ul>
         </div>
     </section>
